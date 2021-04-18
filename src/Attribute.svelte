@@ -19,7 +19,7 @@
 	</div> 
 	<div class="value">
 		{value}
-		{#if increase}
+		{#if increase && increase.multiplier}
 		<span class="diff">
 			(x{ increase.multiplier})
 		</span>
