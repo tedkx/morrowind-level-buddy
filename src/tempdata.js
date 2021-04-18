@@ -32,7 +32,7 @@ const data = {
                 "minor": false
             },
             "speechcraft": {
-                "initial": 40,
+                "initial": 39,
                 "current": 40,
                 "major": true,
                 "minor": false

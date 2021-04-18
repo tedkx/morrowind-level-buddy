@@ -38,7 +38,7 @@
 <div class="container">
 	<TitleBar text={`${$levelProgress} / 10`}>
 		<div class="background" style={transform}></div>
-		{#if true}
+		{#if $levelProgress === 10}
 			<button class="level-up-button" 
 				on:click={showLevelUpScreen}>
 					Level Up
