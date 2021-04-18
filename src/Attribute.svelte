@@ -7,9 +7,10 @@
 <style>
 	.container { display: flex; margin-top: 6px; }
 	.name { flex-grow: 1; }
-	.value { font-weight: bold; width: 65px }
-	.spacer { width: 94px }
-	.diff { color: var(--increase-color) }
+	.value { font-weight: bold; width: 65px; }
+	.diff { color: var(--increase-color); }
+	.spacer { width: 94px; }
+	.spacer span { margin-left: 12px; }
 </style>
 
 <div class="container">
@@ -20,9 +21,13 @@
 		{value}
 		{#if increase}
 		<span class="diff">
-			(+{ increase})
+			(x{ increase.multiplier})
 		</span>
 		{/if}
 	</div>
-	<div class="spacer"></div>
+	<div class="spacer">
+		{#if increase && increase.total}
+			<span>+{increase.total}</span>
+		{/if}
+	</div>
 </div>

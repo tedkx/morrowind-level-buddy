@@ -10,6 +10,9 @@
     }
 
     const modalStyles = {
+        styleWindowWrap: {
+            margin: '0.5rem',
+        },
         styleWindow: {
             background: 'var(--light-color)',
             borderRadius: 0,

@@ -86,11 +86,14 @@ const skillIncreases = derived(
 		
 		Object.keys(attributeSkillCount).forEach(attributeName => {
 			const value = attributeSkillCount[attributeName];
-			attributeSkillCount[attributeName] = value >= 10 ? 5
+			attributeSkillCount[attributeName] = {
+				total: value,
+				multiplier: value >= 10 ? 5
 				: value >= 8 ? 4
 				: value >= 5 ? 3
 				: value >= 1 ? 2
 			 	: 0
+			}
 		});
 		
 		return attributeSkillCount
