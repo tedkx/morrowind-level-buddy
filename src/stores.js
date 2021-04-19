@@ -24,7 +24,7 @@ const createCharacter = () => {
 		attributes: attributeData.reduce((obj, attributeName) => {
 			const modified = modifiedAttributes.find(ma => ma.name === attributeName);
 			obj[attributeName] = currentCharacter.attributes[attributeName] 
-				+ (modified ? modified.value || 1 : 0);
+				+ (modified ? modified.value.multiplier || 1 : 0);
 			return obj;
 		}, {}),
 		level: currentCharacter.level + 1,
