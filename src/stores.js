@@ -114,6 +114,44 @@ const levelProgress = derived(
 	}
 )
 
+const levelingPotential = derived(
+	character,
+	$character => {
+		if(!$character) return {};
+		const skillSum = Object.values($character.skills)
+			.filter(skill => skill.major || skill.minor)
+			.reduce((sum, skill) => sum + (100 - skill.initial), 0);
+		const potentialLevels = Math.floor(skillSum / 10);
+		const attributeSum = attributeData.reduce((sum, attrName) => 
+			attrName === 'Luck'
+				? sum
+				: sum + (100 - $character.attributes[attrName]) 
+			, 0);
+
+		const requiredLevelsForMaxPer2 = Math.ceil(attributeSum / 10);
+		const requiredLevelsForMaxPer3 = Math.ceil(attributeSum / 15);
+
+		return {
+			maxPer2AchievedOnLevel: potentialLevels > requiredLevelsForMaxPer2
+				? $character.level + requiredLevelsForMaxPer2
+				: 'Never',
+			maxPer3AchievedOnLevel: potentialLevels > requiredLevelsForMaxPer3
+				? $character.level + requiredLevelsForMaxPer3
+				: 'Never',
+			potentialLevels,
+			skillSum,
+		}
+	}
+)
+
 const modalComponent = writable(null);
 
-export { attributesOrder, character, levelProgress, modalComponent, skillIncreases, skillsOrder };
+export { 
+	attributesOrder, 
+	character, 
+	levelingPotential,
+	levelProgress, 
+	modalComponent, 
+	skillIncreases, 
+	skillsOrder 
+};

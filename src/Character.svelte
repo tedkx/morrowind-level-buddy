@@ -4,6 +4,7 @@
 	
 	import Skill from './Skill.svelte';
 	import Attribute from './Attribute.svelte';
+	import LevelInfo from './LevelInfo.svelte';
 	import { skillData } from './data';
 	import { attributesOrder, character, skillIncreases, skillsOrder } from './stores';
 	
@@ -14,7 +15,7 @@
 </script>
 
 {#if $character}
-	Level: {$character.level}
+	<LevelInfo />
 
 	<hr />
 
