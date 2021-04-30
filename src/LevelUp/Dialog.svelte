@@ -3,11 +3,15 @@
 
     import AttributeSelector from './AttributeSelector.svelte';
     import TitleBar from '../TitleBar.svelte';
-    import { attributesOrder, character, modalComponent, skillIncreases } from '../stores';
+    import { attributesOrder, character, skillIncreases } from '../stores';
 
     let selectedAttributes = [];
 
     const initialLevel = $character.level;
+    const minNumberOfAttributes = Math.min(3, 
+        Object.values($character.attributes)
+            .reduce((sum, attrValue) => sum + (attrValue < 100 ? 1 : 0), 0)
+    );
 
     const onSubmit = () => {
         if(selectedAttributes.length) 
@@ -17,6 +21,9 @@
             })));
     };
     const handleSelect = attributeName => {
+        if($character.attributes[attributeName] >= 100)
+            return;
+
         const alreadySelected = selectedAttributes.indexOf(attributeName) >= 0;
         if(!alreadySelected && selectedAttributes.length >= 3) return;
         selectedAttributes = alreadySelected
@@ -84,7 +91,7 @@
                 <button on:click={onClose}>
                     Cancel
                 </button>
-                <button disabled={selectedAttributes.length < 3} on:click={onSubmit}>
+                <button disabled={selectedAttributes.length < minNumberOfAttributes} on:click={onSubmit}>
                     Okay
                 </button>
             </div>

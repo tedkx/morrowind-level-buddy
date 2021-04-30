@@ -39,7 +39,9 @@
     <span class="value">{value}
         {#if increase}
             <span class="diff">
-                (+{increase.multiplier})
+                {#if increase.multiplier}
+                    (+{increase.multiplier})
+                {/if}
             </span>
         {/if}
     </span>

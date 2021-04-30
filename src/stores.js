@@ -79,8 +79,10 @@ const skillIncreases = derived(
 		
 		const attributeSkillCount = Object.values(skillData).reduce((obj, { attribute, name }) => {
 			if(!obj[attribute]) obj[attribute] = 0;
-			const { current, initial } = $character.skills[name];
-			obj[attribute] += current - initial;
+			if($character.attributes[attribute] < 100) {
+				const { current, initial } = $character.skills[name];
+				obj[attribute] += current - initial;
+			}
 			return obj;
 		}, {});
 		
